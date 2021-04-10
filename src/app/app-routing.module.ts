@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'favourites', component: FavouritesComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'search', component: SearchResultComponent },
+  { path: '/', component: NewReleasesComponent },
   { path: 'newReleases', component: NewReleasesComponent },
   { path: 'album/:id', component: AlbumComponent },
   { path: 'artist/:id', component: ArtistDiscographyComponent },
