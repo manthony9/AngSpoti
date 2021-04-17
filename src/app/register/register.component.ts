@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterUser } from '../RegisterUser';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  registerUser: RegisterUser;
+  registerUser: RegisterUser = new RegisterUser();
   warning: string;
   success: boolean;
   loading: boolean;
@@ -20,9 +20,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(f: NgForm): void {
+    console.log(f.value);
     if (f.value.userName !== ' ' && f.value.password == f.value.password2) {
       this.loading = true;
-      (this.sub = this.auth.register(this.registerUser).subscribe((obj) => {
+
+      (this.sub = this.auth.register(f.value).subscribe((obj) => {
+        console.log(obj);
+
         this.success = true;
         this.warning = null;
         this.loading = false;

@@ -9,6 +9,7 @@
           matInput
           placeholder="User Name"
           name="userName"
+          [(ngModel)]="registerUser.userName"
           required
           autofocus
         />
@@ -19,6 +20,7 @@
           matInput
           type="password"
           placeholder="Password"
+          [(ngModel)]="registerUser.password"
           name="password"
           required
         />
@@ -29,6 +31,7 @@
           matInput
           type="password"
           placeholder="Password"
+          [(ngModel)]="registerUser.password2"
           name="password2"
           required
         />

@@ -33,7 +33,8 @@ export class AuthService {
   }
 
   login(user): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/api/login', user);
+    console.log('In Auth Login');
+    return this.http.post<any>(`${environment.userAPIBase}/login`, user);
   }
 
   logout() {
@@ -41,6 +42,10 @@ export class AuthService {
   }
 
   register(registerUser): Observable<any> {
-    return this.http.post<any>('environment.userAPIBase/', registerUser);
+    console.log('In Auth Reg');
+    return this.http.post<any>(
+      `${environment.userAPIBase}/register`,
+      registerUser
+    );
   }
 }

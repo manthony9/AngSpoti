@@ -8,9 +8,10 @@
  *
  ********************************************************************************/
 
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { Router, Event, NavigationStart } from '@angular/router';
+import { clear, timeStamp } from 'node:console';
+import { AuthService } from './auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +20,21 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'web422-a4';
   searchString: string;
-  constructor(private router: Router) {}
+  token;
+  constructor(private router: Router, private auth: AuthService) {}
+  ngOnInit() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        this.token = this.auth.readToken();
+      }
+    });
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
   handleSearch() {
     this.router.navigate(['/search'], {
       queryParams: { q: this.searchString },

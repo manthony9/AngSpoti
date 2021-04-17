@@ -14,8 +14,8 @@ import { Subscription } from 'rxjs';
 })
 export class ArtistDiscographyComponent implements OnInit {
   constructor(private route: ActivatedRoute, private ms: MusicDataService) {}
-  public albums: Array<Album>;
-  public artist: SingleArtist;
+  public albums;
+  public artist;
   public id;
   public sub;
   public albumSub;

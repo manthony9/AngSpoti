@@ -26,30 +26,38 @@ export class AlbumComponent implements OnInit {
   ) {}
   public AlbumSub;
   public favSub;
-  public tracks: Array<SimplifiedTrackObject>;
-  public album: SingleAlbum;
-  public id;
+  public tracks;
+  public album;
+  public _id;
+  public sub;
 
-  addToFavourites(id) {
-    if (this.ms.addToFavourites(id)) {
-      this.MatSnackBar.open('Adding to Favourites', 'Done', {
-        duration: 1500,
-      });
-    }
+  ngOnInit() {
+    this._id = this.route.snapshot.paramMap.get('id');
+
+    this.AlbumSub = this.ms.getAlbumById(this._id).subscribe((obj) => {
+      this.album = obj;
+      this.tracks = obj.tracks.items;
+    });
+  }
+
+  addToFavourites(trid) {
+    this.favSub = this.ms.addToFavourites(trid).subscribe(
+      (obj) => {
+        this.MatSnackBar.open('Adding to Favourites', 'Done', {
+          duration: 1500,
+        });
+      },
+      (err) => {
+        this.MatSnackBar.open('Unable to Add Song!', 'Close', {
+          duration: 1500,
+        });
+      }
+    );
   }
 
   convertTime(dur) {
     let tm = dur as number;
     return (tm / 60000).toFixed(2);
-  }
-
-  ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-
-    this.AlbumSub = this.ms.getAlbumById(this.id).subscribe((obj) => {
-      this.album = obj;
-      this.tracks = obj.tracks.items;
-    });
   }
 
   ngOnDestroy() {

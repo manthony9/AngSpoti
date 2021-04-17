@@ -25,8 +25,8 @@ export class FavouritesComponent implements OnInit {
 
   ngOnInit() {
     this.favSub = this.ms.getFavourites().subscribe((obj) => {
+      console.log(obj.tracks);
       this.favourites = obj.tracks;
-      console.log(this.favourites);
     });
   }
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +28,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { InterceptTokenService } from './intercept-token.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,13 @@ import { LoginComponent } from './login/login.component';
     MatChipsModule,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptTokenService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

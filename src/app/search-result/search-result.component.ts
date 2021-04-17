@@ -8,10 +8,9 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./search-result.component.css'],
 })
 export class SearchResultComponent implements OnInit {
-  results: any;
-  searchQuery: any;
-
-  public searchSub;
+  results;
+  searchQuery;
+  searchSub;
   constructor(private route: ActivatedRoute, private ms: MusicDataService) {}
 
   ngOnInit() {

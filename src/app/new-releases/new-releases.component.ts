@@ -12,7 +12,7 @@ import { MusicDataService } from '../music-data.service';
 })
 export class NewReleasesComponent implements OnInit {
   public staticRelease;
-  public releases: Array<Album>;
+  public releases;
   private releasesSub;
   constructor(private ms: MusicDataService) {}
 
